@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <levels size="4">
+    <level id ="1">
+      <element>2</element>
+      <element>1</element>
+      <element>0</element>
+      <element>0</element>
+      <!-- ********************************* -->
+      <element>0</element>
+      <element>3</element>
+      <element>2</element>
+      <element>0</element>
+      <!-- ********************************* -->
+      <element>0</element>
+      <element>0</element>
+      <element>0</element>
+      <element>4</element>
+      <!-- ********************************* -->    
+      <element>1</element>
+      <element>0</element>
+      <element>0</element>
+      <element>0</element>
+     </level>
+    <level id ="2">
+      <element>1</element>
+      <element>0</element>
+      <element>3</element>
+      <element>4</element>
+      <!-- ********************************* -->
+      <element>0</element>
+      <element>3</element>
+      <element>0</element>
+      <element>0</element>
+      <!-- ********************************* -->
+      <element>2</element>
+      <element>0</element>
+      <element>0</element>
+      <element>0</element>
+      <!-- ********************************* -->    
+      <element>0</element>
+      <element>0</element>
+      <element>0</element>
+      <element>1</element>
+    </level>
+  </levels>
+</root>
