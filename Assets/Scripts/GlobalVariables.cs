@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class GlobalVariables : MonoBehaviour
 {
     public enum TypeOfSudokuMatrix
     {
-        Four = 1,
+        Four = 4,
         Five,
         Six,
         Seven,
