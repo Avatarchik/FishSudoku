@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 public class GameController : MonoBehaviour
 {
@@ -32,12 +33,18 @@ public class GameController : MonoBehaviour
         {
             case GlobalVariables.TypeOfSudokuMatrix.Four:
                 attemptsCount = 1;
+                attempt1Image.SetActive(true);
+                attempt2Image.SetActive(false);
                 break;
             case GlobalVariables.TypeOfSudokuMatrix.Five:
                 attemptsCount = 1;
+                attempt1Image.SetActive(true);
+                attempt2Image.SetActive(false);
                 break;
             case GlobalVariables.TypeOfSudokuMatrix.Six:
                 attemptsCount = 1;
+                attempt1Image.SetActive(true);
+                attempt2Image.SetActive(false);
                 break;
             case GlobalVariables.TypeOfSudokuMatrix.Seven:
                 attemptsCount = 2;
@@ -49,6 +56,18 @@ public class GameController : MonoBehaviour
                 attemptsCount = 2;
                 break;
         }
+
+        StartCoroutine(ShowAttemptsWindow());
+    }
+
+    public GameObject attwmptsWindow;
+    public GameObject attempt1Image;
+    public GameObject attempt2Image;
+    IEnumerator ShowAttemptsWindow()
+    {
+        attwmptsWindow.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        attwmptsWindow.SetActive(false);
     }
 
     private void ParseXml(int _levelID)
@@ -104,8 +123,8 @@ public class GameController : MonoBehaviour
             GameObject go = Instantiate(fishPrefabs[_value-1]);
             go.transform.SetParent(tempImageMatrix.gameObject.transform);
             go.transform.localScale = new Vector3(1, 1, 1);
-            go.GetComponent<RectTransform>().offsetMin = new Vector2(5, 10); // right - top
-            go.GetComponent<RectTransform>().offsetMax = new Vector2(-5, 0); // left - bottom
+            go.GetComponent<RectTransform>().offsetMin = new Vector2(35, 10); // right - top
+            go.GetComponent<RectTransform>().offsetMax = new Vector2(-35, 0); // left - bottom
         }
 
         cols++;
@@ -135,8 +154,8 @@ public class GameController : MonoBehaviour
             GameObject go = Instantiate(fishPrefabs[DragAndDrop.id - 1]);
             go.transform.SetParent(_thisSlot);
             go.transform.localScale = new Vector3(1, 1, 1);
-            go.GetComponent<RectTransform>().offsetMin = new Vector2(5, 10); // right - top
-            go.GetComponent<RectTransform>().offsetMax = new Vector2(-5, 0); // left - bottom
+            go.GetComponent<RectTransform>().offsetMin = new Vector2(35, 10); // right - top
+            go.GetComponent<RectTransform>().offsetMax = new Vector2(-35, 0); // left - bottom
 
             int i, j, tempPosInArr;
             tempPosInArr = int.Parse(_thisSlot.name);
@@ -181,6 +200,8 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public GameObject winWindow;
+    public GameObject playArea, leftSideBar;
     public void CheckSudoku()
     {
         for (int i = 0; i < matrixSize; i++)
@@ -203,5 +224,8 @@ public class GameController : MonoBehaviour
             }
         }
         Debug.Log("You Win!!!");
+        winWindow.SetActive(true);
+        playArea.SetActive(false);
+        leftSideBar.SetActive(false);
     }
 }
