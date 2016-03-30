@@ -17,9 +17,7 @@ public class UserInfo : MonoBehaviour
     }
 
     //User Info Singelton
-    
     public int pearlCount { get; set; }
-    public int maxLifeCount { get; private set; }
     private int lifeCountPrivate;
     public int lifeCount
     {   get
@@ -28,12 +26,10 @@ public class UserInfo : MonoBehaviour
         }
         set
         {
-            if (value <= maxLifeCount && value > 0)
-            {
-                lifeCountPrivate = value;
-            }
+            if (lifeCountPrivate >= 5 && lifeCountPrivate <= 0)
+                Debug.Log("Lives is Full");
             else
-                lifeCountPrivate = maxLifeCount;
+                lifeCountPrivate = value;
         }
     }
     public int hintCount { get; set; }
@@ -44,7 +40,6 @@ public class UserInfo : MonoBehaviour
         userParser = UserParser.Load(Application.streamingAssetsPath + "/Userinfo.xml");
         pearlCount = userParser.pearlCount;
         lifeCount = userParser.lifeCount;
-        maxLifeCount = userParser.maxLifeCount;
         hintCount = userParser.hintCount;
     }
 
@@ -52,7 +47,6 @@ public class UserInfo : MonoBehaviour
     {
         userParser.pearlCount = pearlCount;
         userParser.lifeCount = lifeCount;
-        userParser.maxLifeCount = maxLifeCount;
         userParser.hintCount = hintCount;
         userParser.Save(Application.streamingAssetsPath + "/Userinfo.xml");
     }

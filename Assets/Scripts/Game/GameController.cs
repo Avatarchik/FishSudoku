@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour
         matrix = new int[matrixSize, matrixSize];
         matrixComplete = new int[matrixSize, matrixSize];
 
-        ParseXml(1);
+        ParseXml(1/*PlayerPrefs.GetInt("SelectedLevel")*/);
 
         switch (matrixType)
         {
@@ -201,7 +201,8 @@ public class GameController : MonoBehaviour
     }
 
     public GameObject winWindow;
-    public GameObject playArea, leftSideBar;
+    public GameObject playArea, leftSideBar, rightSideBar;
+    public GameObject looseWindow;
     public void CheckSudoku()
     {
         for (int i = 0; i < matrixSize; i++)
@@ -212,7 +213,7 @@ public class GameController : MonoBehaviour
                 {
                     if (attemptsCount <= 0)
                     {
-                        Debug.Log("You Lose One Life :(");
+                        LoseGame();
                     }
                     else
                     {
@@ -223,9 +224,25 @@ public class GameController : MonoBehaviour
                 }
             }
         }
+
+        WinGame();
+    }
+
+    public void LoseGame()
+    {
+        Debug.Log("You Lose One Life :(");
+        looseWindow.SetActive(true);
+        playArea.SetActive(false);
+        leftSideBar.SetActive(false);
+        rightSideBar.SetActive(false);
+    }
+
+    public void WinGame()
+    {
         Debug.Log("You Win!!!");
         winWindow.SetActive(true);
         playArea.SetActive(false);
         leftSideBar.SetActive(false);
+        rightSideBar.SetActive(false);
     }
 }

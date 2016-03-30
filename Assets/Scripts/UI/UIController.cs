@@ -4,42 +4,13 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    public HintTimer currentTimer;
+    public GameObject shopBlock;
+    private GlobalVariables.TypeOfShopElement typeOfShopElement;
 
-    public GameObject rightMenuBackground;
-    public GameObject rightMenuPanel;
-
-    private bool isRightMenuActive = true;
-    private Animation rightMenuPanelAnim;
-
-    public void RightMenu_Button()
+    public void OpenShopButton(int _typeOfShopElement)
     {
-        rightMenuPanelAnim = rightMenuPanel.GetComponent<Animation>();
-        StartCoroutine(RightMenuAnimation());
-    }
-
-    IEnumerator RightMenuAnimation()
-    {
-        if (isRightMenuActive)
-        {
-            currentTimer.Pause();
-
-            rightMenuBackground.SetActive(true);
-            rightMenuPanelAnim["RightMenuPanel_LevelUI"].speed = 1;
-            rightMenuPanelAnim["RightMenuPanel_LevelUI"].time = rightMenuPanelAnim["RightMenuPanel_LevelUI"].length;
-            rightMenuPanelAnim.Play("RightMenuPanel_LevelUI");
-            yield return new WaitForSeconds(rightMenuPanelAnim.clip.length);
-            isRightMenuActive = false;
-        }
-        else
-        {
-            rightMenuPanelAnim["RightMenuPanel_LevelUI"].speed = -1;
-            rightMenuPanelAnim["RightMenuPanel_LevelUI"].time = rightMenuPanelAnim["RightMenuPanel_LevelUI"].length;
-            rightMenuPanelAnim.Play("RightMenuPanel_LevelUI");
-            rightMenuBackground.SetActive(false);
-            isRightMenuActive = true;
-
-            currentTimer.UnPause();
-        }
+        typeOfShopElement = (GlobalVariables.TypeOfShopElement)_typeOfShopElement;
+        shopBlock.SetActive(true);
+        shopBlock.GetComponent<ShopController>().ShowSelectedElement((int)typeOfShopElement);
     }
 }

@@ -11,4 +11,11 @@ public class GlobalVariables : MonoBehaviour
         Eight,
         Nine
     };
+
+    public enum TypeOfShopElement
+    {
+        Pearls,
+        Lives,
+        Hints
+    };
 }

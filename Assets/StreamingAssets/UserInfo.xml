@@ -2,6 +2,6 @@
 <root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <pearlCount>300</pearlCount>
   <lifeCount>30</lifeCount>
-  <maxLifeCount>15</maxLifeCount>
   <hintCount>45</hintCount>
+  <unlimitedForAllDay>0 </unlimitedForAllDay>
 </root>
