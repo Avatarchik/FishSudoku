@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 18ca8a605b0fe3d4ebf843d24e91b37f
-timeCreated: 1457202726
+guid: 564b45f8c866e3e4fb2336cdb8cf071b
+timeCreated: 1459611414
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -30,7 +30,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: 16
+    aniso: 1
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -49,7 +49,7 @@ TextureImporter:
   textureType: 8
   buildTargetSettings:
   - buildTarget: iPhone
-    maxTextureSize: 512
+    maxTextureSize: 256
     textureFormat: -3
     compressionQuality: 50
     allowsAlphaSplitting: 0
