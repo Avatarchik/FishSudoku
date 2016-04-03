@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Xml.Serialization;
 
 [XmlRoot("root")]
@@ -15,6 +16,27 @@ public class UserParser
 
     [XmlElement("hintCount")]
     public int hintCount;
+
+    [XmlElement("timeToStartLifesTimer")]
+    public DateTime timeToStartLifesTimer;
+
+    [XmlElement("CurrentLevel4")]
+    public int currentLevel4;
+
+    [XmlElement("CurrentLevel5")]
+    public int currentLevel5;
+
+    [XmlElement("CurrentLevel6")]
+    public int currentLevel6;
+
+    [XmlElement("CurrentLevel7")]
+    public int currentLevel7;
+
+    [XmlElement("CurrentLevel8")]
+    public int currentLevel8;
+
+    [XmlElement("CurrentLevel9")]
+    public int currentLevel9;
 
     //Time 
 

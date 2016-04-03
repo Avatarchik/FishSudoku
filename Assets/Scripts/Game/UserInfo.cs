@@ -1,9 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System;
+using UnityEngine;
 
-public class UserInfo : MonoBehaviour
+public class UserInfo
 {
-    private UserInfo() { }
     private static UserInfo _instance;
     public static UserInfo Instance
     {
@@ -15,6 +14,7 @@ public class UserInfo : MonoBehaviour
             return _instance;
         }
     }
+    private UserInfo() { }
 
     //User Info Singelton
     public int pearlCount { get; set; }
@@ -32,8 +32,17 @@ public class UserInfo : MonoBehaviour
                 lifeCountPrivate = value;
         }
     }
+
+    public DateTime timeToStartLifesTimer;
+
     public int hintCount { get; set; }
-    
+    public int currentLevel4 { get; set; }
+    public int currentLevel5 { get; set; }
+    public int currentLevel6 { get; set; }
+    public int currentLevel7 { get; set; }
+    public int currentLevel8 { get; set; }
+    public int currentLevel9 { get; set; }
+
     private UserParser userParser;
     public void LoadUserInfo()
     {
@@ -41,6 +50,15 @@ public class UserInfo : MonoBehaviour
         pearlCount = userParser.pearlCount;
         lifeCount = userParser.lifeCount;
         hintCount = userParser.hintCount;
+
+        currentLevel4 = userParser.currentLevel4;
+        currentLevel5 = userParser.currentLevel5;
+        currentLevel6 = userParser.currentLevel6;
+        currentLevel7 = userParser.currentLevel7;
+        currentLevel8 = userParser.currentLevel8;
+        currentLevel9 = userParser.currentLevel9;
+
+        Debug.Log("userInfo Loaded Sucessful");
     }
 
     public void SaveUserInfo()
@@ -48,6 +66,16 @@ public class UserInfo : MonoBehaviour
         userParser.pearlCount = pearlCount;
         userParser.lifeCount = lifeCount;
         userParser.hintCount = hintCount;
+
+        userParser.currentLevel4 = currentLevel4;
+        userParser.currentLevel5 = currentLevel5;
+        userParser.currentLevel6 = currentLevel6;
+        userParser.currentLevel7 = currentLevel7;
+        userParser.currentLevel8 = currentLevel8;
+        userParser.currentLevel9 = currentLevel9;
+
         userParser.Save(Application.streamingAssetsPath + "/Userinfo.xml");
+
+        Debug.Log("userInfo Save Sucessful");
     }
 }
