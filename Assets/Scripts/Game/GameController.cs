@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour
         matrix = new int[matrixSize, matrixSize];
         matrixComplete = new int[matrixSize, matrixSize];
 
-        ParseXml(1/*PlayerPrefs.GetInt("SelectedLevel")*/);
+        ParseXml(PlayerPrefs.GetInt("SelectedLevel"));
 
         switch (matrixType)
         {
@@ -48,12 +48,18 @@ public class GameController : MonoBehaviour
                 break;
             case GlobalVariables.TypeOfSudokuMatrix.Seven:
                 attemptsCount = 2;
+                attempt1Image.SetActive(false);
+                attempt2Image.SetActive(true);
                 break;
             case GlobalVariables.TypeOfSudokuMatrix.Eight:
                 attemptsCount = 2;
+                attempt1Image.SetActive(false);
+                attempt2Image.SetActive(true);
                 break;
             case GlobalVariables.TypeOfSudokuMatrix.Nine:
                 attemptsCount = 2;
+                attempt1Image.SetActive(false);
+                attempt2Image.SetActive(true);
                 break;
         }
 

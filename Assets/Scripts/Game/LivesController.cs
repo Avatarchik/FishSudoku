@@ -42,6 +42,33 @@ public class LivesController : MonoBehaviour
         Debug.Log("Lives Is Loaded");
     }
 
+    public void RefreshLives()
+    {
+        currentLifes = UserInfo.Instance.lifeCount;
+        if (currentLifes == 5)
+        {
+            noLifesImage.SetActive(false);
+            lifeRechargeFill.SetActive(false);
+            lifesRechargeText.SetActive(false);
+
+            foreach (var mm in allLifes)
+            {
+                mm.sprite = heartYes;
+            }
+        }
+        else
+        {
+            noLifesImage.SetActive(true);
+            lifeRechargeFill.SetActive(true);
+            lifesRechargeText.SetActive(true);
+
+            for (int i = 0; i < currentLifes; i++)
+            {
+                AddOneLife(i);
+            }
+        }
+    }
+
     public void AddOneLife(int _lifePos)
     {
         allLifes[_lifePos].sprite = heartYes;

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <pearlCount>300</pearlCount>
+  <pearlCount>200</pearlCount>
   <lifeCount>5</lifeCount>
-  <hintCount>45</hintCount>
+  <maxLifeCount>0</maxLifeCount>
+  <hintCount>9</hintCount>
+  <timeToStartLifesTimer>2002-09-24T09:00:00+03:00</timeToStartLifesTimer>
   <unlimitedForAllDay>0</unlimitedForAllDay>
-  <timeToStartLifesTimer></timeToStartLifesTimer>
-  <CurrentLevel4>1</CurrentLevel4>
+  <CurrentLevel4>8</CurrentLevel4>
   <CurrentLevel5>1</CurrentLevel5>
   <CurrentLevel6>1</CurrentLevel6>
   <CurrentLevel7>1</CurrentLevel7>

@@ -9,7 +9,10 @@ public class UserInfo
         get
         {
             if (_instance == null)
+            {
                 _instance = new UserInfo();
+                _instance.LoadUserInfo();
+            }
 
             return _instance;
         }
@@ -32,8 +35,8 @@ public class UserInfo
                 lifeCountPrivate = value;
         }
     }
-
-    public DateTime timeToStartLifesTimer;
+    public int unlimitedForAllDay { get; set; }
+    public DateTime timeToStartLifesTimer { get; set; }
 
     public int hintCount { get; set; }
     public int currentLevel4 { get; set; }
@@ -50,6 +53,7 @@ public class UserInfo
         pearlCount = userParser.pearlCount;
         lifeCount = userParser.lifeCount;
         hintCount = userParser.hintCount;
+        unlimitedForAllDay = userParser.unlimitedForAllDay;
 
         currentLevel4 = userParser.currentLevel4;
         currentLevel5 = userParser.currentLevel5;
@@ -66,6 +70,7 @@ public class UserInfo
         userParser.pearlCount = pearlCount;
         userParser.lifeCount = lifeCount;
         userParser.hintCount = hintCount;
+        userParser.unlimitedForAllDay = unlimitedForAllDay;
 
         userParser.currentLevel4 = currentLevel4;
         userParser.currentLevel5 = currentLevel5;

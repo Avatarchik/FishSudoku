@@ -13,8 +13,6 @@ public class MapController : MonoBehaviour
 
     void Start()
     {
-        UserInfo.Instance.LoadUserInfo();
-
         pealrCountText.text = UserInfo.Instance.pearlCount.ToString();
         livesController.enabled = true;
 
@@ -52,5 +50,11 @@ public class MapController : MonoBehaviour
             _someBtn.interactable = true;
             _someBtn.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
             _someBtn.GetComponentInChildren<Text>().color = new Color32(255, 255, 255, 255);
+    }
+
+    public void UpdateResources()
+    {
+        pealrCountText.text = UserInfo.Instance.pearlCount.ToString();
+        livesController.RefreshLives();
     }
 }

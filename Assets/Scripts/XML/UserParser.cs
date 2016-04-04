@@ -20,6 +20,9 @@ public class UserParser
     [XmlElement("timeToStartLifesTimer")]
     public DateTime timeToStartLifesTimer;
 
+    [XmlElement("unlimitedForAllDay")]
+    public int unlimitedForAllDay;
+
     [XmlElement("CurrentLevel4")]
     public int currentLevel4;
 
