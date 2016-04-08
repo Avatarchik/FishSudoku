@@ -11,9 +11,10 @@ public class GameController : MonoBehaviour
 
     public GlobalVariables.TypeOfSudokuMatrix matrixType;
 
-    private int matrixSize;
-    private int[,] matrix;
-    private int[,] matrixComplete;
+    [HideInInspector]
+    public int matrixSize;
+    public int[,] matrix;
+    public int[,] matrixComplete;
     public List<Image> imageList;
     public List<GameObject> fishPrefabs;
     public List<GameObject> fishDragAndDropPrefabs;
@@ -83,11 +84,17 @@ public class GameController : MonoBehaviour
 
         foreach (var mm in xmlParser.allLevels)
         {
-            if (mm.levelId == _levelID)
+            if(mm.levelSize == matrixSize)
             {
-                foreach (var nn in mm.elementsMatrix)
+                foreach (var nn in mm.levels)
                 {
-                    GenerateMatrix(nn);
+                    if (nn.levelId == _levelID)
+                    {
+                        foreach (var rr in nn.elementsMatrix)
+                        {
+                            GenerateMatrix(rr);
+                        }
+                    }
                 }
             }
         }
@@ -98,15 +105,21 @@ public class GameController : MonoBehaviour
         int i = 0, j = 0, tempMatrixComplete = 0;
         foreach (var mm in xmlParser.allLevels)
         {
-            if (mm.levelId == _levelID)
+            if(mm.levelSize == matrixSize)
             {
-                foreach (var nn in mm.elementsMatrix)
+                foreach(var nn in mm.levels)
                 {
-                    i = tempMatrixComplete / matrixSize;
-                    j = tempMatrixComplete % matrixSize;
-                    matrixComplete[i, j] = nn;
+                    if(nn.levelId == _levelID)
+                    {
+                        foreach(var rr in nn.elementsMatrix)
+                        {
+                            i = tempMatrixComplete / matrixSize;
+                            j = tempMatrixComplete % matrixSize;
+                            matrixComplete[i, j] = rr;
 
-                    tempMatrixComplete++;
+                            tempMatrixComplete++;
+                        }
+                    }
                 }
             }
         }
@@ -115,7 +128,8 @@ public class GameController : MonoBehaviour
     }
 
     private int rows = 0, cols = 0, tempCount = 0;
-    private ListElement tempImageMatrix;
+    [HideInInspector]
+    public ListElement tempImageMatrix;
     private void GenerateMatrix(int _value)
     {
         matrix[rows, cols] = _value;
@@ -134,7 +148,7 @@ public class GameController : MonoBehaviour
         }
 
         cols++;
-        if (cols == 4)
+        if (cols == matrixSize)
         {
             rows++;
             cols = 0;
@@ -169,6 +183,8 @@ public class GameController : MonoBehaviour
             j = tempPosInArr % matrixSize;
 
             matrix[i, j] = fishId;
+
+            GameObject.FindObjectOfType<HintController>().DisableHintEffects();
         }
 
         if (MatrixIsFull())

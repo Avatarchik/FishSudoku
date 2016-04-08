@@ -55,6 +55,6 @@ public class MapController : MonoBehaviour
     public void UpdateResources()
     {
         pealrCountText.text = UserInfo.Instance.pearlCount.ToString();
-        livesController.RefreshLives();
+        livesController.RefreshLifes();
     }
 }

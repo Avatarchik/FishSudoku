@@ -53,6 +53,7 @@ public class RighMenuUIController : MonoBehaviour
         SceneManager.LoadScene("Map",LoadSceneMode.Single);
     }
 
+
     public void BuyFullVersion()
     {
         Debug.Log("Buy Full Version");

@@ -29,7 +29,7 @@ public class GlobalVariables : MonoBehaviour
             count = _count;
             switch (_count)
             {
-                
+
                 case 1:
                     price = 10;
                     break;
@@ -39,8 +39,11 @@ public class GlobalVariables : MonoBehaviour
                 case 5:
                     price = 500;
                     break;
-                default:
+                case 0:
                     price = 1000;
+                    break;
+                default:
+                    price = 0;
                     break;
             }
         }

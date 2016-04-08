@@ -23,7 +23,7 @@ public class DragAndDrop : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
         }
     }
 }

@@ -20,6 +20,9 @@ public class UserParser
     [XmlElement("timeToStartLifesTimer")]
     public DateTime timeToStartLifesTimer;
 
+    [XmlElement("timeToFillHint")]
+    public DateTime timeToFillHint;
+
     [XmlElement("unlimitedForAllDay")]
     public int unlimitedForAllDay;
 
@@ -46,7 +49,7 @@ public class UserParser
     public void Save(string path)
     {
         var serializer = new XmlSerializer(typeof(UserParser));
-        using (var stream = new FileStream(path, FileMode.OpenOrCreate))
+        using (var stream = new FileStream(path, FileMode.Open))
         {
             serializer.Serialize(stream, this);
         }

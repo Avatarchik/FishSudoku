@@ -3,14 +3,15 @@ using UnityEngine.UI;
 
 public class MenuUIController : MonoBehaviour
 {
-    public Text pearlCount;
-    public LivesController lifes;
-    public Text hintCount;
+    public Text pearlCountText;
+    public LivesController livesController;
+    public Text hintCountText;
 
     void Start()
     {
-        pearlCount.text = UserInfo.Instance.pearlCount.ToString();
-        hintCount.text = UserInfo.Instance.hintCount.ToString();
+        pearlCountText.text = UserInfo.Instance.pearlCount.ToString();
+        //livesController.RefreshLives();
+        hintCountText.text = UserInfo.Instance.hintCount.ToString();
     }
 
     public GameObject shopBlock;
@@ -21,5 +22,12 @@ public class MenuUIController : MonoBehaviour
         typeOfShopElement = (GlobalVariables.TypeOfShopElement)_typeOfShopElement;
         shopBlock.SetActive(true);
         shopBlock.GetComponent<ShopController>().ShowSelectedElement((int)typeOfShopElement);
+    }
+
+    public void UpdateResources()
+    {
+        pearlCountText.text = UserInfo.Instance.pearlCount.ToString();
+        livesController.RefreshLifes();
+        hintCountText.text = UserInfo.Instance.hintCount.ToString();
     }
 }

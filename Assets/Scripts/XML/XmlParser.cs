@@ -5,8 +5,8 @@ using System.Xml.Serialization;
 [XmlRoot("root")]
 public class XmlParser
 {
-    [XmlArray("levels")]
-    [XmlArrayItem("level")]
+    [XmlArray("allLevels")]
+    [XmlArrayItem("levels")]
     public List<Levels> allLevels = new List<Levels>();
 
     public static XmlParser Load(string path)
@@ -27,6 +27,15 @@ public class XmlParser
 }
 
 public class Levels
+{
+    [XmlAttribute("size")]
+    public int levelSize;
+
+    [XmlElement("level")]
+    public List<SomeLevel> levels = new List<SomeLevel>();
+}
+
+public class SomeLevel
 {
     [XmlAttribute("id")]
     public int levelId;

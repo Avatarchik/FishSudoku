@@ -1,11 +1,17 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class ShopController : MonoBehaviour
 {
     public GameObject[] tubsImages;
     public GameObject[] bundles;
     public bool thisIsMapScene = false;
+    public LivesController livesContr;
+
+    void Start()
+    {
+        if (livesContr == null)
+            livesContr = GameObject.FindObjectOfType<LivesController>();
+    }
 
     public void ShowSelectedElement(int _typeOfShopElement)
     {
@@ -42,7 +48,7 @@ public class ShopController : MonoBehaviour
         }
         else
         {
-            //GameObject.FindObjectOfType<MapController>().UpdateResources(GlobalVariables.TypeOfShopElement.Pearls);
+            GameObject.FindObjectOfType<MenuUIController>().UpdateResources();
         }
 
         Debug.Log("Buy " + _count + " pearls");
@@ -60,6 +66,9 @@ public class ShopController : MonoBehaviour
                 UserInfo.Instance.pearlCount -= buyLifes.price;
                 UserInfo.Instance.lifeCount += _count;
                 UserInfo.Instance.SaveUserInfo();
+                
+                if(_count != 0) //Unlimited Lifes
+                    livesContr.ReWriteTime(_count);
 
                 if (thisIsMapScene)
                 {
@@ -67,7 +76,7 @@ public class ShopController : MonoBehaviour
                 }
                 else
                 {
-                    //GameObject.FindObjectOfType<MapController>().UpdateResources(GlobalVariables.TypeOfShopElement.);
+                    GameObject.FindObjectOfType<MenuUIController>().UpdateResources();
                 }
 
                 Debug.Log("Buy " + _count + " lifes");
@@ -92,10 +101,16 @@ public class ShopController : MonoBehaviour
             UserInfo.Instance.hintCount += _count;
             UserInfo.Instance.SaveUserInfo();
 
-            if (!thisIsMapScene)
+            if (thisIsMapScene)
             {
-                //GameObject.FindObjectOfType<MapController>().UpdateResources(GlobalVariables.TypeOfShopElement.);
+                GameObject.FindObjectOfType<MapController>().UpdateResources();
             }
+            else
+            {
+                GameObject.FindObjectOfType<MenuUIController>().UpdateResources();
+            }
+
+            GameObject.FindObjectOfType<HintController>().StopHintTimer();
 
             Debug.Log("Buy " + _count + " hints");
         }

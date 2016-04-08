@@ -16,10 +16,17 @@ public class UIController : MonoBehaviour
     private int matrixSize;
     public void SomeLevelButton(int _level)
     {
-        Debug.Log("Level " + _level + " loading...");
-        PlayerPrefs.SetInt("SelectedLevel", _level);
-        matrixSize = PlayerPrefs.GetInt("matrixSize");
-        SceneManager.LoadScene("PlayLevel" + matrixSize + "x" + matrixSize, LoadSceneMode.Single);
+        if (UserInfo.Instance.canUseLife)
+        {
+            Debug.Log("Level " + _level + " loading...");
+            PlayerPrefs.SetInt("SelectedLevel", _level);
+            matrixSize = PlayerPrefs.GetInt("matrixSize");
+            SceneManager.LoadScene("PlayLevel" + matrixSize + "x" + matrixSize, LoadSceneMode.Single);
+        }
+        else
+        {
+            Debug.Log("No Lifes!!!");
+        }
     }
 
     public void BackToChooseLevelDifficultButton()

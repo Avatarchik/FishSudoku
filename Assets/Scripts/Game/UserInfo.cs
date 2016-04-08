@@ -29,7 +29,7 @@ public class UserInfo
         }
         set
         {
-            if (lifeCountPrivate >= 5 && lifeCountPrivate <= 0)
+            if (lifeCountPrivate > 5 && lifeCountPrivate <= 0)
                 Debug.Log("Lives is Full");
             else
                 lifeCountPrivate = value;
@@ -37,6 +37,7 @@ public class UserInfo
     }
     public int unlimitedForAllDay { get; set; }
     public DateTime timeToStartLifesTimer { get; set; }
+    public DateTime timeToFillHint { get; set; }
 
     public int hintCount { get; set; }
     public int currentLevel4 { get; set; }
@@ -46,6 +47,35 @@ public class UserInfo
     public int currentLevel8 { get; set; }
     public int currentLevel9 { get; set; }
 
+    public bool canUseHint
+    {
+        get
+        {
+            if(hintCount != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+    public bool canUseLife
+    {
+        get
+        {
+            if(lifeCount != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+
     private UserParser userParser;
     public void LoadUserInfo()
     {
@@ -54,6 +84,9 @@ public class UserInfo
         lifeCount = userParser.lifeCount;
         hintCount = userParser.hintCount;
         unlimitedForAllDay = userParser.unlimitedForAllDay;
+
+        timeToFillHint = userParser.timeToFillHint;
+        timeToStartLifesTimer = userParser.timeToStartLifesTimer;
 
         currentLevel4 = userParser.currentLevel4;
         currentLevel5 = userParser.currentLevel5;
@@ -71,6 +104,9 @@ public class UserInfo
         userParser.lifeCount = lifeCount;
         userParser.hintCount = hintCount;
         userParser.unlimitedForAllDay = unlimitedForAllDay;
+
+        userParser.timeToFillHint = timeToFillHint;
+        userParser.timeToStartLifesTimer = timeToStartLifesTimer;
 
         userParser.currentLevel4 = currentLevel4;
         userParser.currentLevel5 = currentLevel5;

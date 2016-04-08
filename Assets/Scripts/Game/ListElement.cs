@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class ListElement : MonoBehaviour
 {
-    [HideInInspector]
+    //[HideInInspector]
     public bool isAnchor = false;
 
     public int id;
