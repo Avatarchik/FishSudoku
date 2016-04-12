@@ -6,6 +6,7 @@ public class ShopController : MonoBehaviour
     public GameObject[] bundles;
     public bool thisIsMapScene = false;
     public LivesController livesContr;
+    public GameObject notEnoughtMoneyPopUp;
 
     void Start()
     {
@@ -66,8 +67,8 @@ public class ShopController : MonoBehaviour
                 UserInfo.Instance.pearlCount -= buyLifes.price;
                 UserInfo.Instance.lifeCount += _count;
                 UserInfo.Instance.SaveUserInfo();
-                
-                if(_count != 0) //Unlimited Lifes
+
+                if (_count != 0) //Unlimited Lifes
                     livesContr.ReWriteTime(_count);
 
                 if (thisIsMapScene)
@@ -82,7 +83,7 @@ public class ShopController : MonoBehaviour
                 Debug.Log("Buy " + _count + " lifes");
             }
             else
-                Debug.Log("Not Enought Money");
+                notEnoughtMoneyPopUp.SetActive(true);
         }
         else
         {
@@ -114,8 +115,21 @@ public class ShopController : MonoBehaviour
             Debug.Log("Buy " + _count + " hints");
         }
         else
-            Debug.Log("Not Enought Money");
-       
+            notEnoughtMoneyPopUp.SetActive(true);
+
     }
     //Buy Hints END
+
+    //Not Enought Money Pop Up START
+    public void NemBuyButton()
+    {
+        ShowSelectedElement(0);
+        notEnoughtMoneyPopUp.SetActive(false);
+    }
+
+    public void NemCloseButton()
+    {
+        notEnoughtMoneyPopUp.SetActive(false);
+    }
+    //Not Enought Money Pop Up END
 }

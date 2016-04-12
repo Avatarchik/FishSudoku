@@ -63,7 +63,7 @@ public class HintController : MonoBehaviour
     
     private List<Image> currentImageList;
     private int rand;
-    private bool isHintUsed = true;
+    private bool isHintUsed = false;
     public void UseHintButton()
     {
         if (!isHintUsed)
@@ -131,16 +131,16 @@ public class HintController : MonoBehaviour
 
     public void DisableHintEffects()
     {
-        if (!isHintUsed)
+        if (isHintUsed)
         {
             foreach (var mm in currentImageList)
             {
                 if (mm.sprite == itemSprError)
                     mm.sprite = itemSpr;
             }
+
+            isHintUsed = false;
         }
-        
-        isHintUsed = false;
     }
 
     public void StopHintTimer()
