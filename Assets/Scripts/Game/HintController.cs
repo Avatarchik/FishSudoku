@@ -119,6 +119,10 @@ public class HintController : MonoBehaviour
                 {
                     fishButtonsGO[k].GetComponent<Animator>().Play("Pressed");
                 }
+                else
+                {
+                    fishButtonsGO[k].GetComponent<Animator>().Play("Normal");
+                }
             }
 
             isHintUsed = true;
@@ -127,12 +131,12 @@ public class HintController : MonoBehaviour
 
     public void DisableHintEffects()
     {
-       /* foreach(var mm in currentImageList)
+       foreach(var mm in currentImageList)
         {
             if (mm.sprite == itemSprError)
                 mm.sprite = itemSpr;
         }
-        */
+        
         isHintUsed = false;
     }
 

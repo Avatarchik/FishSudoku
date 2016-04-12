@@ -23,6 +23,7 @@ public class LivesController : MonoBehaviour
         {
             seconds = (int)(UserInfo.Instance.timeToStartLifesTimer - DateTime.Now).TotalSeconds / 900;
             UserInfo.Instance.lifeCount = 5 - (seconds + 1);
+            UserInfo.Instance.SaveUserInfo();
         }
 
         RefreshLifes();
@@ -121,12 +122,13 @@ public class LivesController : MonoBehaviour
         }
     }
 
+    private float timerTick;
     public void TimerLifes()
     {
         timer = timer.Subtract(new TimeSpan(0, 0, 1));
         rechargeTime.text = String.Format("{0:D2}:{1:D2}", timer.Minutes, timer.Seconds);
-       // timerTick = 1f - ((float)timer.TotalSeconds) / 7200f;
-        //hintFillImage.fillAmount = timerTick;
+        timerTick = 1f - ((float)timer.TotalSeconds) / 900f;
+        lifeRechargeImage.fillAmount = timerTick;
 
         if (timer <= TimeSpan.Zero)
         {

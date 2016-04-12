@@ -12,9 +12,9 @@ public class DragAndDrop : MonoBehaviour
         id = int.Parse(gameObject.name);
     }
 
-    RaycastHit2D hit;
+  //  RaycastHit2D hit;
 
-    void Update()
+    /*void Update()
     {
         if (Input.GetMouseButton(0))
         {
@@ -23,8 +23,8 @@ public class DragAndDrop : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            //Destroy(this.gameObject);
+            Destroy(this.gameObject);
         }
-    }
+    }*/
 }
 

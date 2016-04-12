@@ -9,4 +9,9 @@ public class ListElement : MonoBehaviour
 
     public int id;
     public Image fishImage;
+
+    public void DisableButton()
+    {
+        this.gameObject.GetComponent<Button>().interactable = false;
+    }
 }

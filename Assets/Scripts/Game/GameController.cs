@@ -17,7 +17,6 @@ public class GameController : MonoBehaviour
     public int[,] matrixComplete;
     public List<Image> imageList;
     public List<GameObject> fishPrefabs;
-    public List<GameObject> fishDragAndDropPrefabs;
     public Canvas canvas;
 
     private int attemptsCount;
@@ -140,6 +139,7 @@ public class GameController : MonoBehaviour
         if (_value != 0)
         {
             tempImageMatrix.isAnchor = true;
+            tempImageMatrix.DisableButton();
             GameObject go = Instantiate(fishPrefabs[_value-1]);
             go.transform.SetParent(tempImageMatrix.gameObject.transform);
             go.transform.localScale = new Vector3(1, 1, 1);
@@ -156,15 +156,48 @@ public class GameController : MonoBehaviour
     }
 
     private int fishId;
+    private Animator selectedAnimator;
     public void FishButton(int _fishId)
     {
+        if(selectedAnimator != null)
+            selectedAnimator.Play("Normal");
+
+        selectedAnimator = EventSystem.current.currentSelectedGameObject.GetComponent<Animator>();
+        selectedAnimator.Play("Pressed");
+
         fishId = _fishId;
-        GameObject go = Instantiate(fishDragAndDropPrefabs[_fishId-1],Input.mousePosition,Quaternion.identity) as GameObject;
-        go.transform.SetParent(canvas.transform);
-        go.transform.localScale = new Vector3(1, 1, 1);
     }
 
-    public void DropSomeFishElement(Transform _thisSlot)
+    public void InsertItemToSomePlace(Transform _thisSlot)
+    {
+        if (_thisSlot.GetComponent<ListElement>().isAnchor == false)
+        {
+            if (_thisSlot.childCount > 0)
+                Destroy(_thisSlot.GetChild(0).gameObject);
+
+            GameObject go = Instantiate(fishPrefabs[fishId - 1]);
+            go.transform.SetParent(_thisSlot);
+            go.transform.localScale = new Vector3(1, 1, 1);
+            go.GetComponent<RectTransform>().offsetMin = new Vector2(35, 10); // right - top
+            go.GetComponent<RectTransform>().offsetMax = new Vector2(-35, 0); // left - bottom
+
+            int i, j, tempPosInArr;
+            tempPosInArr = int.Parse(_thisSlot.name);
+            i = tempPosInArr / matrixSize;
+            j = tempPosInArr % matrixSize;
+
+            matrix[i, j] = fishId;
+
+            GameObject.FindObjectOfType<HintController>().DisableHintEffects();
+        }
+
+        if (MatrixIsFull())
+            CheckSudoku();
+
+        ShowMatrix(matrix);
+    }
+
+   /* public void DropSomeFishElement(Transform _thisSlot)
     {
         if (_thisSlot.GetComponent<ListElement>().isAnchor == false)
         {
@@ -191,7 +224,7 @@ public class GameController : MonoBehaviour
             CheckSudoku();
 
         ShowMatrix(matrix);
-    }
+    } */
 
     public bool MatrixIsFull()
     {

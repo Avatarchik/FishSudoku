@@ -108,9 +108,8 @@ public class ShopController : MonoBehaviour
             else
             {
                 GameObject.FindObjectOfType<MenuUIController>().UpdateResources();
+                GameObject.FindObjectOfType<HintController>().StopHintTimer();
             }
-
-            GameObject.FindObjectOfType<HintController>().StopHintTimer();
 
             Debug.Log("Buy " + _count + " hints");
         }
