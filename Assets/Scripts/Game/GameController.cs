@@ -71,6 +71,17 @@ public class GameController : MonoBehaviour
     public GameObject attempt2Image;
     IEnumerator ShowAttemptsWindow()
     {
+        if(attemptsCount == 1)
+        {
+            attempt1Image.SetActive(true);
+            attempt2Image.SetActive(false);
+        }
+        else if (attemptsCount == 2)
+        {
+            attempt1Image.SetActive(false);
+            attempt2Image.SetActive(true);
+        }
+
         attwmptsWindow.SetActive(true);
         yield return new WaitForSeconds(2f);
         attwmptsWindow.SetActive(false);
@@ -273,6 +284,8 @@ public class GameController : MonoBehaviour
                     else
                     {
                         attemptsCount--;
+                        if (attemptsCount != 0)
+                            StartCoroutine(ShowAttemptsWindow());
                         Debug.Log("Attempts: " + attemptsCount);
                     }
                     return;
