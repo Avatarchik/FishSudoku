@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using UnityEngine;
 
 public class UserInfo
@@ -38,6 +39,7 @@ public class UserInfo
     public int unlimitedForAllDay { get; set; }
     public DateTime timeToStartLifesTimer { get; set; }
     public DateTime timeToFillHint { get; set; }
+    public DateTime timeToEndUnlimitedLifes { get; set; }
 
     public int hintCount { get; set; }
     public int currentLevel4 { get; set; }
@@ -76,10 +78,32 @@ public class UserInfo
         }
     }
 
+    public bool canUnlimitedLifes
+    {
+        get
+        {
+            if(unlimitedForAllDay == 0)
+            {
+                return false;
+            }
+            else
+            {
+                if(DateTime.Now > timeToEndUnlimitedLifes)
+                {
+                    unlimitedForAllDay = 0;
+                    SaveUserInfo();
+                    return false;
+                }
+                else
+                    return true;
+            }
+        }
+    }
+
     private UserParser userParser;
     public void LoadUserInfo()
     {
-        userParser = UserParser.Load(Application.streamingAssetsPath + "/Userinfo.xml");
+        userParser = UserParser.Load(GetUserInfoXml());
         pearlCount = userParser.pearlCount;
         lifeCount = userParser.lifeCount;
         hintCount = userParser.hintCount;
@@ -87,6 +111,7 @@ public class UserInfo
 
         timeToFillHint = userParser.timeToFillHint;
         timeToStartLifesTimer = userParser.timeToStartLifesTimer;
+        timeToEndUnlimitedLifes = userParser.timeToEndUnlimitedLifes;
 
         currentLevel4 = userParser.currentLevel4;
         currentLevel5 = userParser.currentLevel5;
@@ -107,6 +132,7 @@ public class UserInfo
 
         userParser.timeToFillHint = timeToFillHint;
         userParser.timeToStartLifesTimer = timeToStartLifesTimer;
+        userParser.timeToEndUnlimitedLifes = timeToEndUnlimitedLifes;
 
         userParser.currentLevel4 = currentLevel4;
         userParser.currentLevel5 = currentLevel5;
@@ -115,8 +141,24 @@ public class UserInfo
         userParser.currentLevel8 = currentLevel8;
         userParser.currentLevel9 = currentLevel9;
 
-        userParser.Save(Application.streamingAssetsPath + "/Userinfo.xml");
+        userParser.Save(GetUserInfoXml());
 
         Debug.Log("userInfo Save Sucessful");
+    }
+
+    private string GetUserInfoXml()
+    {
+        string path;
+        
+        if (Application.isEditor)
+        {
+            path = path = Path.Combine(Application.persistentDataPath, "UserInfo.xml");
+        }
+        else
+        {
+            path = path = Path.Combine(Application.persistentDataPath, "UserInfo.xml");
+        }
+
+        return path;
     }
 }

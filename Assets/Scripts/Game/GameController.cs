@@ -179,8 +179,10 @@ public class GameController : MonoBehaviour
         fishId = _fishId;
     }
 
-    public void InsertItemToSomePlace(Transform _thisSlot)
+    public void InsertItemToSomePlace()
     {
+        Transform _thisSlot = EventSystem.current.currentSelectedGameObject.transform;
+
         if (_thisSlot.GetComponent<ListElement>().isAnchor == false)
         {
             if (_thisSlot.childCount > 0)

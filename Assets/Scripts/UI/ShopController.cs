@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 public class ShopController : MonoBehaviour
 {
@@ -70,6 +71,12 @@ public class ShopController : MonoBehaviour
 
                 if (_count != 0) //Unlimited Lifes
                     livesContr.ReWriteTime(_count);
+                else
+                {
+                    UserInfo.Instance.unlimitedForAllDay = 1;
+                    UserInfo.Instance.timeToEndUnlimitedLifes = DateTime.Now.AddHours(24);
+                    UserInfo.Instance.SaveUserInfo();
+                }
 
                 if (thisIsMapScene)
                 {

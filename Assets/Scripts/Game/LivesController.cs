@@ -65,17 +65,20 @@ public class LivesController : MonoBehaviour
 
     public void SubtractOneLife()
     {
-        if(UserInfo.Instance.canUseLife)
+        if (!UserInfo.Instance.canUnlimitedLifes)
         {
-            if (UserInfo.Instance.lifeCount == 5)
-                UserInfo.Instance.timeToStartLifesTimer = DateTime.Now.AddMinutes(15);
-            else
-                UserInfo.Instance.timeToStartLifesTimer = UserInfo.Instance.timeToStartLifesTimer.AddMinutes(15);
+            if (UserInfo.Instance.canUseLife)
+            {
+                if (UserInfo.Instance.lifeCount == 5)
+                    UserInfo.Instance.timeToStartLifesTimer = DateTime.Now.AddMinutes(15);
+                else
+                    UserInfo.Instance.timeToStartLifesTimer = UserInfo.Instance.timeToStartLifesTimer.AddMinutes(15);
 
-            UserInfo.Instance.lifeCount--;
-            UserInfo.Instance.SaveUserInfo();
+                UserInfo.Instance.lifeCount--;
+                UserInfo.Instance.SaveUserInfo();
 
-            RefreshLifes();
+                RefreshLifes();
+            }
         }
     }
 

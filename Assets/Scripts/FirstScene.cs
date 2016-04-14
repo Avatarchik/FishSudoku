@@ -8,11 +8,13 @@ public class FirstScene : MonoBehaviour
     public GameObject loadBlock;
     public GameObject playButton;
     public GameObject logo;
+    public GameObject howToPlay;
 
     public void PlayButton()
     {
         logo.SetActive(false);
         playButton.SetActive(false);
+        howToPlay.SetActive(false);
 
         difficultBlock.SetActive(true);
     }
@@ -23,6 +25,7 @@ public class FirstScene : MonoBehaviour
 
         logo.SetActive(true);
         playButton.SetActive(true);
+        howToPlay.SetActive(true);
     }
 
     public void TypeOfLevelButton(int _matrixSize)
