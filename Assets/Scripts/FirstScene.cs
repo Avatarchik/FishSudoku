@@ -15,7 +15,7 @@ public class FirstScene : MonoBehaviour
         logo.GetComponent<Animator>().Play("LogotypeHide");
         //logo.SetActive(false);
 
-        playButton.GetComponent<Animation>().Play("PlayHide");
+        playButton.GetComponent<Animator>().Play("PlayHide");
         //playButton.SetActive(false);
 
         howToPlay.GetComponent<Animator>().Play("HowToPlayHide");
@@ -34,7 +34,7 @@ public class FirstScene : MonoBehaviour
         logo.GetComponent<Animator>().Play("LogotypeUnhide");
         //logo.SetActive(true);
 
-        playButton.GetComponent<Animation>().Play("PlayUnhide");
+        playButton.GetComponent<Animator>().Play("PlayUnhide");
         //playButton.SetActive(true);
 
         howToPlay.GetComponent<Animator>().Play("HowToPlayUnhide");
