@@ -190,7 +190,8 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private int fishId;
+    [HideInInspector]
+    public static int fishId;
     private Animator selectedAnimator;
     public void FishButton(int _fishId)
     {
@@ -203,6 +204,7 @@ public class GameController : MonoBehaviour
         fishId = _fishId;
     }
 
+    private int lastFishId;
     public void InsertItemToSomePlace()
     {
         Transform _thisSlot = EventSystem.current.currentSelectedGameObject.transform;
@@ -216,8 +218,25 @@ public class GameController : MonoBehaviour
 
             if (_thisSlot.childCount > 0)
             {
+                lastFishId = int.Parse(_thisSlot.GetChild(0).name.Replace("(Clone)",""));
                 Destroy(_thisSlot.GetChild(0).gameObject);
-                matrix[i, j] = 0;
+
+                if (lastFishId == fishId)
+                {
+                    matrix[i, j] = 0;
+                }
+                else
+                {
+                    GameObject go = Instantiate(fishPrefabs[fishId - 1]);
+                    go.transform.SetParent(_thisSlot);
+                    go.transform.localScale = new Vector3(1, 1, 1);
+                    go.GetComponent<RectTransform>().offsetMin = new Vector2(35, 10); // right - top
+                    go.GetComponent<RectTransform>().offsetMax = new Vector2(-35, 0); // left - bottom
+
+                    matrix[i, j] = fishId;
+
+                    GameObject.FindObjectOfType<HintController>().DisableHintEffects();
+                }
             }
             else
             {

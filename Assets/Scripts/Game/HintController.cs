@@ -37,6 +37,7 @@ public class HintController : MonoBehaviour
     private void StartHintTimer()
     {
         timer = UserInfo.Instance.timeToFillHint - DateTime.Now;
+        Debug.Log("hour: "+timer.Hours+" minutes:" + timer.Minutes);
         hintButton.SetActive(false);
         hintTimer.gameObject.SetActive(true);
         hintFillImage.gameObject.SetActive(true);
@@ -47,7 +48,7 @@ public class HintController : MonoBehaviour
     private void InvokeTimer()
     {
         timer = timer.Subtract(new TimeSpan(0,1,0));
-        hintTimer.text = String.Format("{0:D2}:{1:D2}", timer.Hours, timer.Minutes);
+        hintTimer.text = String.Format("{0:D2}h:{1:D2}m", timer.Hours, timer.Minutes);
         timerTick = 1f - ((float)timer.TotalSeconds) / 7200f;
         hintFillImage.fillAmount = timerTick;
 
@@ -76,7 +77,7 @@ public class HintController : MonoBehaviour
 
                 if (UserInfo.Instance.hintCount == 0)
                 {
-                    UserInfo.Instance.timeToFillHint = DateTime.Now.AddHours(2);
+                    UserInfo.Instance.timeToFillHint = DateTime.Now.AddMinutes(121);
 
                     StartHintTimer();
                 }
@@ -118,6 +119,7 @@ public class HintController : MonoBehaviour
                 if(k+1 == gameContr.matrixComplete[i,j])
                 {
                     fishButtonsGO[k].GetComponent<Animator>().Play("Pressed");
+                    GameController.fishId = k + 1;
                 }
                 else
                 {

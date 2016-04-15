@@ -8,9 +8,12 @@ public class ShopController : MonoBehaviour
     public bool thisIsMapScene = false;
     public LivesController livesContr;
     public GameObject notEnoughtMoneyPopUp;
+    public GameObject shopBackground;
 
     void Start()
     {
+        shopBackground.SetActive(true);
+
         if (livesContr == null)
             livesContr = GameObject.FindObjectOfType<LivesController>();
     }
@@ -34,6 +37,7 @@ public class ShopController : MonoBehaviour
 
     public void CloseShopButton()
     {
+        shopBackground.SetActive(false);
         gameObject.SetActive(false);
     }
 
