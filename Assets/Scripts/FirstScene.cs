@@ -12,20 +12,33 @@ public class FirstScene : MonoBehaviour
 
     public void PlayButton()
     {
-        logo.SetActive(false);
-        playButton.SetActive(false);
-        howToPlay.SetActive(false);
+        logo.GetComponent<Animator>().Play("LogotypeHide");
+        //logo.SetActive(false);
+
+        playButton.GetComponent<Animation>().Play("PlayHide");
+        //playButton.SetActive(false);
+
+        howToPlay.GetComponent<Animator>().Play("HowToPlayHide");
+        //howToPlay.SetActive(false);
 
         difficultBlock.SetActive(true);
+        difficultBlock.GetComponent<Animation>().Play("DifficultBlockUnhide");
+       
     }
 
     public void CloseDifficultBlockButton()
     {
-        difficultBlock.SetActive(false);
+        difficultBlock.GetComponent<Animation>().Play("DifficultBlockHide");
+        //difficultBlock.SetActive(false);
 
-        logo.SetActive(true);
-        playButton.SetActive(true);
-        howToPlay.SetActive(true);
+        logo.GetComponent<Animator>().Play("LogotypeUnhide");
+        //logo.SetActive(true);
+
+        playButton.GetComponent<Animation>().Play("PlayUnhide");
+        //playButton.SetActive(true);
+
+        howToPlay.GetComponent<Animator>().Play("HowToPlayUnhide");
+        //howToPlay.SetActive(true);
     }
 
     public void TypeOfLevelButton(int _matrixSize)
