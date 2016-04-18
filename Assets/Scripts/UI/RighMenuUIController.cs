@@ -50,6 +50,12 @@ public class RighMenuUIController : MonoBehaviour
 
     public void BackToMapButton()
     {
+        if (UserInfo.Instance.canUseLife)
+        {
+            UserInfo.Instance.lifeCount--;
+            UserInfo.Instance.SaveUserInfo();
+        }
+
         SceneManager.LoadScene("Map",LoadSceneMode.Single);
     }
 
@@ -57,6 +63,6 @@ public class RighMenuUIController : MonoBehaviour
     public void BuyFullVersion()
     {
         Debug.Log("Buy Full Version");
-        //Application.OpenURL("http://google.com.ua");
+        Application.OpenURL("http://google.com.ua");
     }
 }

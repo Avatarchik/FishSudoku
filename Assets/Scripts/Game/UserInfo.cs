@@ -152,11 +152,11 @@ public class UserInfo
         
         if (Application.isEditor)
         {
-            path = path = Path.Combine(Application.persistentDataPath, "UserInfo.xml");
+            path = Path.Combine(Application.persistentDataPath, "UserInfo.xml");
         }
         else
         {
-            path = path = Path.Combine(Application.persistentDataPath, "UserInfo.xml");
+            path = Path.Combine(Application.persistentDataPath, "UserInfo.xml");
         }
 
         return path;

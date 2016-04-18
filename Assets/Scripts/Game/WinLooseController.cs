@@ -13,6 +13,7 @@ public class WinLooseController : MonoBehaviour
     {
         matrixSize = PlayerPrefs.GetInt("matrixSize");
         currentSelectedLevel = PlayerPrefs.GetInt("SelectedLevel");
+        int value = 0;
 
         if (isThisWinBlock)
         {
@@ -21,22 +22,34 @@ public class WinLooseController : MonoBehaviour
                 switch (matrixSize)
                 {
                     case 4:
-                        UserInfo.Instance.currentLevel4++;
+                        value = UserInfo.Instance.currentLevel4;
+                        CheckOpenNewLevel(ref value);
+                        UserInfo.Instance.currentLevel4 = value;
                         break;
                     case 5:
-                        UserInfo.Instance.currentLevel5++;
+                        value = UserInfo.Instance.currentLevel5;
+                        CheckOpenNewLevel(ref value);
+                        UserInfo.Instance.currentLevel5 = value;
                         break;
                     case 6:
-                        UserInfo.Instance.currentLevel6++;
+                        value = UserInfo.Instance.currentLevel6;
+                        CheckOpenNewLevel(ref value);
+                        UserInfo.Instance.currentLevel6 = value;
                         break;
                     case 7:
-                        UserInfo.Instance.currentLevel7++;
+                        value = UserInfo.Instance.currentLevel7;
+                        CheckOpenNewLevel(ref value);
+                        UserInfo.Instance.currentLevel7 = value;
                         break;
                     case 8:
-                        UserInfo.Instance.currentLevel8++;
+                        value = UserInfo.Instance.currentLevel8;
+                        CheckOpenNewLevel(ref value);
+                        UserInfo.Instance.currentLevel8 = value;
                         break;
                     case 9:
-                        UserInfo.Instance.currentLevel9++;
+                        value = UserInfo.Instance.currentLevel9;
+                        CheckOpenNewLevel(ref value);
+                        UserInfo.Instance.currentLevel9 = value;
                         break;
                 }
 
@@ -46,6 +59,14 @@ public class WinLooseController : MonoBehaviour
         else
         {
             livesContr.SubtractOneLife();
+        }
+    }
+
+    private void CheckOpenNewLevel(ref int _xmlCurrentLevel)
+    {
+        if(currentSelectedLevel == _xmlCurrentLevel)
+        {
+            _xmlCurrentLevel++;
         }
     }
 

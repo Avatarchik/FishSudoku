@@ -29,11 +29,10 @@ public class GameController : MonoBehaviour
         matrix = new int[matrixSize, matrixSize];
         matrixComplete = new int[matrixSize, matrixSize];
 
-        int tempRandom = Random.Range(1, 101);
-        Debug.Log("tempRandom: "+tempRandom);
         if(matrixType == GlobalVariables.TypeOfSudokuMatrix.Four)
         {
-            if(tempRandom % 2 == 0)
+            int tempRandom = Random.Range(1, 101);
+            if (tempRandom % 2 == 0)
             {
                 fishPrefabs.Clear();
                 fishPrefabs.AddRange(fishPrefabsFor4x4Two);
@@ -86,28 +85,26 @@ public class GameController : MonoBehaviour
                 attempt2Image.SetActive(true);
                 break;
         }
-
-        StartCoroutine(ShowAttemptsWindow());
     }
 
     public GameObject attwmptsWindow;
     public GameObject attempt1Image;
     public GameObject attempt2Image;
-    IEnumerator ShowAttemptsWindow()
+    IEnumerator ShowAttemptsWindow(int _count)
     {
-        if(attemptsCount == 1)
+        if(_count == 1)
         {
             attempt1Image.SetActive(true);
             attempt2Image.SetActive(false);
         }
-        else if (attemptsCount == 2)
+        else if (_count == 2)
         {
             attempt1Image.SetActive(false);
             attempt2Image.SetActive(true);
         }
 
         attwmptsWindow.SetActive(true);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
         attwmptsWindow.SetActive(false);
     }
     
@@ -319,31 +316,33 @@ public class GameController : MonoBehaviour
     public GameObject winWindow;
     public GameObject playArea, leftSideBar, rightSideBar;
     public GameObject looseWindow;
+    private int errorCount = 0;
     public void CheckSudoku()
     {
+        errorCount = 0;
         for (int i = 0; i < matrixSize; i++)
         {
             for (int j = 0; j < matrixSize; j++)
             {
                 if(matrix[i,j] != matrixComplete[i,j])
                 {
-                    if (attemptsCount <= 0)
-                    {
-                        LoseGame();
-                    }
-                    else
-                    {
-                        attemptsCount--;
-                        if (attemptsCount != 0)
-                            StartCoroutine(ShowAttemptsWindow());
-                        Debug.Log("Attempts: " + attemptsCount);
-                    }
-                    return;
+                    errorCount++;
                 }
             }
         }
 
-        WinGame();
+        if (attemptsCount < errorCount)
+        {
+            LoseGame();
+        }
+        else if (attemptsCount == errorCount)
+        {
+            StartCoroutine(ShowAttemptsWindow(errorCount));
+        }
+        else
+        {
+            WinGame();
+        }
     }
 
     public void LoseGame()

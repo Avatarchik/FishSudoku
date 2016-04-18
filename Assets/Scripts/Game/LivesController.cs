@@ -25,6 +25,11 @@ public class LivesController : MonoBehaviour
             UserInfo.Instance.lifeCount = 5 - (seconds + 1);
             UserInfo.Instance.SaveUserInfo();
         }
+        else
+        {
+            UserInfo.Instance.lifeCount = 5;
+            UserInfo.Instance.SaveUserInfo();
+        }
 
         RefreshLifes();
         Debug.Log("Lives Is Loaded");
