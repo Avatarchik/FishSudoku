@@ -8,6 +8,7 @@ public class RighMenuUIController : MonoBehaviour
     public Slider volumeSlider;
     public AudioSource musicSource;
     public AudioSource soundSource;
+    public GameObject mapButton;
 
     public void OnChangeMusicVolume()
     {
@@ -29,12 +30,14 @@ public class RighMenuUIController : MonoBehaviour
             rightMenuBg.SetActive(false);
             HidePanel();
             isSettingPanelActive = false;
+            mapButton.GetComponent<Animation>().Stop();
         }
         else
         {
             isSettingPanelActive = true;
             rightMenuBg.SetActive(true);
             ShowPanel();
+            mapButton.GetComponent<Animation>().Play();
         }
     }
 
