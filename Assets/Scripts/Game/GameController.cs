@@ -110,7 +110,7 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(2f);
         attwmptsWindow.SetActive(false);
     }
-
+    
     private void ParseXml(int _levelID)
     {
         xmlDoc = (TextAsset)Resources.Load("LevelsManager");
@@ -349,6 +349,7 @@ public class GameController : MonoBehaviour
     public void LoseGame()
     {
         Debug.Log("You Lose One Life :(");
+        //playArea.GetComponent<Animation>().Play("End");
         looseWindow.SetActive(true);
         playArea.SetActive(false);
         leftSideBar.SetActive(false);
@@ -358,6 +359,7 @@ public class GameController : MonoBehaviour
     public void WinGame()
     {
         Debug.Log("You Win!!!");
+        //playArea.GetComponent<Animation>().Play("End");
         winWindow.SetActive(true);
         playArea.SetActive(false);
         leftSideBar.SetActive(false);
