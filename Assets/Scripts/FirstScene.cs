@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 public class FirstScene : MonoBehaviour
 {
@@ -9,6 +8,11 @@ public class FirstScene : MonoBehaviour
     public GameObject playButton;
     public GameObject logo;
     public GameObject howToPlay;
+
+    void Start()
+    {
+        StartCoroutine(GlobalVariables.LoadingSomeScene("Loading",true));
+    }
 
     public void PlayButton()
     {
@@ -44,12 +48,14 @@ public class FirstScene : MonoBehaviour
     public void TypeOfLevelButton(int _matrixSize)
     {
         PlayerPrefs.SetInt("matrixSize", _matrixSize);
-        SceneManager.LoadScene("Map", LoadSceneMode.Single);
+
+        LoadingController.nextSceneName = "Map";
+        GlobalVariables.asunc.allowSceneActivation = true;
     }
 
     public void BuyFullVersionButton()
     {
         Debug.Log("Show URL");
-        //Application.OpenURL("");
+        Application.OpenURL("http://google.com");
     }
 }

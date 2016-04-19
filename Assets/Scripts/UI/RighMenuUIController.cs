@@ -30,14 +30,16 @@ public class RighMenuUIController : MonoBehaviour
             rightMenuBg.SetActive(false);
             HidePanel();
             isSettingPanelActive = false;
-            mapButton.GetComponent<Animation>().Stop();
+            if(mapButton != null)
+                mapButton.GetComponent<Animation>().Stop();
         }
         else
         {
             isSettingPanelActive = true;
             rightMenuBg.SetActive(true);
             ShowPanel();
-            mapButton.GetComponent<Animation>().Play();
+            if (mapButton != null)
+                mapButton.GetComponent<Animation>().Play();
         }
     }
 
@@ -55,11 +57,13 @@ public class RighMenuUIController : MonoBehaviour
     {
         if (UserInfo.Instance.canUseLife)
         {
-            UserInfo.Instance.lifeCount--;
-            UserInfo.Instance.SaveUserInfo();
+            GameObject.FindObjectOfType<LivesController>().SubtractOneLife();
+            Debug.Log("RIGHT LIVES: "+UserInfo.Instance.lifeCount);
         }
 
-        SceneManager.LoadScene("Map",LoadSceneMode.Single);
+        LoadingController.nextSceneName = "Map";
+        StartCoroutine(GlobalVariables.LoadingSomeScene("Loading", false));
+        //SceneManager.LoadScene("Map",LoadSceneMode.Single);
     }
 
 

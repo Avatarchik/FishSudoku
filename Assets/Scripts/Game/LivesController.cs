@@ -54,9 +54,13 @@ public class LivesController : MonoBehaviour
 
         if(UserInfo.Instance.lifeCount < 5)
         {
+            if(UserInfo.Instance.lifeCount == 0)
+                rechargeTime.gameObject.SetActive(true);
+            else
+                rechargeTime.gameObject.SetActive(false);
+
             noLifeImage.SetActive(true);
             lifeRechargeImage.gameObject.SetActive(true);
-            rechargeTime.gameObject.SetActive(true);
 
             CheckTimer();
         }

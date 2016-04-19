@@ -348,20 +348,32 @@ public class GameController : MonoBehaviour
     public void LoseGame()
     {
         Debug.Log("You Lose One Life :(");
-        //playArea.GetComponent<Animation>().Play("End");
-        looseWindow.SetActive(true);
-        playArea.SetActive(false);
-        leftSideBar.SetActive(false);
-        rightSideBar.SetActive(false);
+        StartCoroutine(StartEndAnim(playArea.GetComponent<Animation>(),true));
     }
 
     public void WinGame()
     {
         Debug.Log("You Win!!!");
-        //playArea.GetComponent<Animation>().Play("End");
-        winWindow.SetActive(true);
-        playArea.SetActive(false);
-        leftSideBar.SetActive(false);
-        rightSideBar.SetActive(false);
+        StartCoroutine(StartEndAnim(playArea.GetComponent<Animation>(),false));
+    }
+
+    IEnumerator StartEndAnim(Animation _anim,bool _isLoose)
+    {
+        _anim.Play("End");
+        yield return new WaitForSeconds(_anim["End"].length + 0.5f);
+        if(_isLoose)
+        {
+            looseWindow.SetActive(true);
+            playArea.SetActive(false);
+            leftSideBar.SetActive(false);
+            rightSideBar.SetActive(false);
+        }
+        else
+        {
+            winWindow.SetActive(true);
+            playArea.SetActive(false);
+            leftSideBar.SetActive(false);
+            rightSideBar.SetActive(false);
+        }
     }
 }

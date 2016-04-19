@@ -77,17 +77,24 @@ public class WinLooseController : MonoBehaviour
         {
             currentSelectedLevel++;
             PlayerPrefs.SetInt("SelectedLevel", currentSelectedLevel);
-            SceneManager.LoadScene("PlayLevel"+matrixSize+"x"+matrixSize);
+
+            LoadingController.nextSceneName = "PlayLevel" + matrixSize + "x" + matrixSize;
+            StartCoroutine(GlobalVariables.LoadingSomeScene("Loading", false));
+            //SceneManager.LoadScene("PlayLevel"+matrixSize+"x"+matrixSize);
         }
         else
         {
-            SceneManager.LoadScene("ChooseLevelDifficult");
+            LoadingController.nextSceneName = "ChooseLevelDifficult";
+            StartCoroutine(GlobalVariables.LoadingSomeScene("Loading", false));
+            //SceneManager.LoadScene("ChooseLevelDifficult");
         }
     }
 
     public void CloseButtonWin()
     {
-        SceneManager.LoadScene("Map");
+        LoadingController.nextSceneName = "Map";
+        StartCoroutine(GlobalVariables.LoadingSomeScene("Loading", false));
+        //SceneManager.LoadScene("Map");
     }
     //Win Block END
 
@@ -96,13 +103,17 @@ public class WinLooseController : MonoBehaviour
     {
         if(UserInfo.Instance.canUseLife)
         {
-            SceneManager.LoadScene("PlayLevel" + matrixSize + "x" + matrixSize);
+            LoadingController.nextSceneName = "PlayLevel" + matrixSize + "x" + matrixSize;
+            StartCoroutine(GlobalVariables.LoadingSomeScene("Loading", false));
+            //SceneManager.LoadScene("PlayLevel" + matrixSize + "x" + matrixSize);
         }
     }
     
     public void CloseButtonLoose()
     {
-        SceneManager.LoadScene("Map");
+        LoadingController.nextSceneName = "Map";
+        StartCoroutine(GlobalVariables.LoadingSomeScene("Loading", false));
+        //SceneManager.LoadScene("Map");
     }
     //Loose Block END
 }

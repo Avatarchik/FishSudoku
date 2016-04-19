@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GlobalVariables : MonoBehaviour
 {
@@ -83,4 +85,16 @@ public class GlobalVariables : MonoBehaviour
             }
         }
     };
+
+    public static AsyncOperation asunc = null;
+    public static IEnumerator LoadingSomeScene(string _sceneName,bool _loadForStart)
+    {
+        asunc = SceneManager.LoadSceneAsync(_sceneName, LoadSceneMode.Single);
+        if(_loadForStart)
+            asunc.allowSceneActivation = false;
+        else
+            asunc.allowSceneActivation = true;
+
+        yield return asunc;
+    }
 }

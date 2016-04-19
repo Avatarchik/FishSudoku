@@ -18,10 +18,12 @@ public class UIController : MonoBehaviour
     {
         if (UserInfo.Instance.canUseLife)
         {
-            Debug.Log("Level " + _level + " loading...");
             PlayerPrefs.SetInt("SelectedLevel", _level);
             matrixSize = PlayerPrefs.GetInt("matrixSize");
-            SceneManager.LoadScene("PlayLevel" + matrixSize + "x" + matrixSize, LoadSceneMode.Single);
+
+            LoadingController.nextSceneName = "PlayLevel" + matrixSize + "x" + matrixSize;
+            StartCoroutine(GlobalVariables.LoadingSomeScene("Loading", false));
+            //SceneManager.LoadScene("PlayLevel" + matrixSize + "x" + matrixSize, LoadSceneMode.Single);
         }
         else
         {
@@ -31,6 +33,8 @@ public class UIController : MonoBehaviour
 
     public void BackToChooseLevelDifficultButton()
     {
-        SceneManager.LoadScene("ChooseLevelDifficult", LoadSceneMode.Single);
+        LoadingController.nextSceneName = "ChooseLevelDifficult";
+        StartCoroutine(GlobalVariables.LoadingSomeScene("Loading", false));
+        //SceneManager.LoadScene("ChooseLevelDifficult", LoadSceneMode.Single);
     }
 }
