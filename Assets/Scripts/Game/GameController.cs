@@ -103,6 +103,9 @@ public class GameController : MonoBehaviour
             attempt2Image.SetActive(true);
         }
 
+        if(attemptsCount != 0)
+            attemptsCount--;
+
         attwmptsWindow.SetActive(true);
         yield return new WaitForSeconds(1.5f);
         attwmptsWindow.SetActive(false);
@@ -317,6 +320,7 @@ public class GameController : MonoBehaviour
     public GameObject playArea, leftSideBar, rightSideBar;
     public GameObject looseWindow;
     private int errorCount = 0;
+    private bool canUseAttempts = true;
     public void CheckSudoku()
     {
         errorCount = 0;
@@ -334,15 +338,15 @@ public class GameController : MonoBehaviour
         if (attemptsCount < errorCount)
         {
             LoseGame();
+            return;
         }
         else if (attemptsCount == errorCount)
         {
             StartCoroutine(ShowAttemptsWindow(errorCount));
+            return;
         }
-        else
-        {
-            WinGame();
-        }
+
+        WinGame();
     }
 
     public void LoseGame()
