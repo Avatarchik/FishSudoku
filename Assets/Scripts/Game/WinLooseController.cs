@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class WinLooseController : MonoBehaviour
 {
@@ -60,6 +60,9 @@ public class WinLooseController : MonoBehaviour
         {
             livesContr.SubtractOneLife();
         }
+
+        //Bubbles Animation
+        StartCoroutine(AnimBubbles());
     }
 
     private void CheckOpenNewLevel(ref int _xmlCurrentLevel)
@@ -116,4 +119,32 @@ public class WinLooseController : MonoBehaviour
         //SceneManager.LoadScene("Map");
     }
     //Loose Block END
+
+    //Bubbles Pop START
+    public List<Animation> bublesWithAnimation = new List<Animation>();
+    public int elementCount = 15;
+    IEnumerator AnimBubbles()
+    {
+        for (int i = bublesWithAnimation.Count - 1; i >= 0; i--)
+        {
+            int rand = Random.Range(0, bublesWithAnimation.Count);
+            int j = rand;
+            var temp = bublesWithAnimation[i];
+            bublesWithAnimation[i] = bublesWithAnimation[j];
+            bublesWithAnimation[j] = temp;
+        }
+
+        if (elementCount > bublesWithAnimation.Count)
+            elementCount = bublesWithAnimation.Count;
+
+        for (int i = 0; i < elementCount; i++)
+        {
+            bublesWithAnimation[i].Play(/*"Animation name"*/);
+            yield return new WaitForSeconds(bublesWithAnimation[i]["anim"].length);
+            bublesWithAnimation.Remove(bublesWithAnimation[i]);
+            Destroy(bublesWithAnimation[i].gameObject);
+        }
+    }
+
+    //Bubbles Pop END
 }
