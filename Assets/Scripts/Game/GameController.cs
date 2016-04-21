@@ -92,7 +92,7 @@ public class GameController : MonoBehaviour
     public GameObject attempt2Image;
     IEnumerator ShowAttemptsWindow(int _count)
     {
-        if(_count == 1)
+        if (_count == 1)
         {
             attempt1Image.SetActive(true);
             attempt2Image.SetActive(false);
@@ -103,8 +103,10 @@ public class GameController : MonoBehaviour
             attempt2Image.SetActive(true);
         }
 
-        if(attemptsCount != 0)
+        if (attemptsCount != 0)
             attemptsCount--;
+
+        Debug.Log("attempts = " + attemptsCount);
 
         attwmptsWindow.SetActive(true);
         yield return new WaitForSeconds(1.5f);

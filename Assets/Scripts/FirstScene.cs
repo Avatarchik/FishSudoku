@@ -26,7 +26,7 @@ public class FirstScene : MonoBehaviour
         howToPlay.GetComponent<Animator>().Play("HowToPlayHide");
         //howToPlay.SetActive(false);
 
-        difficultBlock.SetActive(true);
+        //difficultBlock.SetActive(true);
         difficultBlock.GetComponent<Animation>().Play("DifficultBlockUnhide");
 
     }
@@ -64,17 +64,17 @@ public class FirstScene : MonoBehaviour
     {
         howToPlay.GetComponent<Animator>().Play("HowToPlayHide");
         logo.GetComponent<Animator>().Play("LogotypeHide");
-        howToPlay.GetComponent<Animator>().Play("HowToPlayHide");
+        //howToPlay.GetComponent<Animator>().Play("HowToPlayHide");
         playButton.GetComponent<Animator>().Play("PlayHide");
         rules.GetComponent<Animation>().Play("RulesUnhide");
-        rules.SetActive(true);
+        //rules.SetActive(true);
      }
 
     public void CloseRules()
     {
         howToPlay.GetComponent<Animator>().Play("HowToPlayUnhide");
         logo.GetComponent<Animator>().Play("LogotypeUnhide");
-        howToPlay.GetComponent<Animator>().Play("HowToPlayUnhide");
+        //howToPlay.GetComponent<Animator>().Play("HowToPlayUnhide");
         playButton.GetComponent<Animator>().Play("PlayUnhide");
         rules.GetComponent<Animation>().Play("RulesHide");
     }

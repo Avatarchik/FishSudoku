@@ -1,10 +1,17 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SuspendController : MonoBehaviour
-{    
+{
+    private string sceneName;
+    void Start()
+    {
+        sceneName = SceneManager.GetActiveScene().name;
+    }
+
     #region Suspend
-    void OnApplicationFocus(bool pauseStatus)
+    void OnApplicationPause(bool pauseStatus)
     {
         if (!pauseStatus)
         {
@@ -37,6 +44,21 @@ public class SuspendController : MonoBehaviour
                     NativePluginsController.HintRefillLocalNotification(UserInfo.Instance.timeToFillHint);
                 }
             }
+        }   
+    }
+
+    void OnApplicationQuit()
+    {
+        switch (sceneName)
+        {
+            case "PlayLevel4x4":
+            case "PlayLevel5x5":
+            case "PlayLevel6x6":
+            case "PlayLevel7x7":
+            case "PlayLevel8x8":
+            case "PlayLevel9x9":
+                GameObject.FindObjectOfType<LivesController>().SubtractOneLife();
+                break;
         }
     }
     #endregion

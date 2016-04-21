@@ -10,7 +10,13 @@ public class MapController : MonoBehaviour
     private int matrixSize;
     public Text pealrCountText;
     public LivesController livesController;
+    public RectTransform scrollMap;
 
+    private float currentLevelPosX = 0;
+    private float Center = 960.0f;
+    private float buttonW = 0;
+    private float shiftScrollMap = 0;
+    private float maxShiftScrollMaxp = -3838.322f;
     void Start()
     {
         pealrCountText.text = UserInfo.Instance.pearlCount.ToString();
@@ -42,6 +48,19 @@ public class MapController : MonoBehaviour
         for(int i = 0; i < currentLevel; i++)
         {
             SetInteractableToButton(levelButtons[i]);
+        }
+
+        if(currentLevel >= 10 && currentLevel <= 32)
+        {
+            currentLevelPosX = levelButtons[currentLevel - 1].GetComponent<RectTransform>().anchoredPosition.x;
+            buttonW = levelButtons[currentLevel - 1].GetComponent<RectTransform>().sizeDelta.x;
+            shiftScrollMap = currentLevelPosX - Center + (buttonW / 2);
+
+            scrollMap.anchoredPosition = new Vector2(-1 * shiftScrollMap, 0);
+        }
+        else if(currentLevel > 32)
+        {
+            scrollMap.anchoredPosition = new Vector2(-3838.322f, 0);
         }
     }
 
