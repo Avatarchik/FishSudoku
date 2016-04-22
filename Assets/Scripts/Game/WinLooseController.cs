@@ -141,8 +141,8 @@ public class WinLooseController : MonoBehaviour
         {
             bublesWithAnimation[i].Play("BubblePop");
             yield return new WaitForSeconds(bublesWithAnimation[i]["BubblePop"].length);
-            bublesWithAnimation.Remove(bublesWithAnimation[i]);
-            Destroy(bublesWithAnimation[i].gameObject);
+            //bublesWithAnimation.Remove(bublesWithAnimation[i]);
+            //Destroy(bublesWithAnimation[i].gameObject);
         }
     }
 
