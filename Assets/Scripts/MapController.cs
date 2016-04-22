@@ -11,12 +11,17 @@ public class MapController : MonoBehaviour
     public Text pealrCountText;
     public LivesController livesController;
     public RectTransform scrollMap;
-
+    
     private float currentLevelPosX = 0;
     private float Center = 960.0f;
     private float buttonW = 0;
     private float shiftScrollMap = 0;
     private float maxShiftScrollMaxp = -3838.322f;
+
+    public RectTransform fishWrapper;
+    public float offsetXFishWrapper;
+    public float offsetYFishWrapper;
+
     void Start()
     {
         pealrCountText.text = UserInfo.Instance.pearlCount.ToString();
@@ -62,6 +67,12 @@ public class MapController : MonoBehaviour
         {
             scrollMap.anchoredPosition = new Vector2(-3838.322f, 0);
         }
+
+        //Position of Fish Wrapper
+        RectTransform tempButtonPos = levelButtons[currentLevel-1].GetComponent<RectTransform>();
+        Debug.Log(tempButtonPos.anchoredPosition);
+        fishWrapper.anchoredPosition = new Vector2(Mathf.Floor(tempButtonPos.anchoredPosition.x + offsetXFishWrapper),
+                tempButtonPos.anchoredPosition.y + offsetYFishWrapper);
     }
 
     void SetInteractableToButton(Button _someBtn)
