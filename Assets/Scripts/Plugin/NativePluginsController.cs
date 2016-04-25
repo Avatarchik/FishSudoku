@@ -12,7 +12,7 @@ public class NativePluginsController : MonoBehaviour
     void Awake()
     {
         IOSNotificationController.instance.RequestNotificationPermissions();
-        InitBilling();
+       // InitBilling();
     }
 
     void Start()
