@@ -100,6 +100,8 @@ public class UserInfo
         }
     }
 
+    public int exitAfterGameStart;
+
     private UserParser userParser;
     public void LoadUserInfo()
     {
@@ -120,7 +122,7 @@ public class UserInfo
         currentLevel8 = userParser.currentLevel8;
         currentLevel9 = userParser.currentLevel9;
 
-        Debug.Log("userInfo Loaded Sucessful");
+        exitAfterGameStart = userParser.exitAfterGameStart;
     }
 
     public void SaveUserInfo()
@@ -141,9 +143,9 @@ public class UserInfo
         userParser.currentLevel8 = currentLevel8;
         userParser.currentLevel9 = currentLevel9;
 
-        userParser.Save(GetUserInfoXml());
+        userParser.exitAfterGameStart = exitAfterGameStart;
 
-        Debug.Log("userInfo Save Sucessful");
+        userParser.Save(GetUserInfoXml());
     }
 
     private string GetUserInfoXml()

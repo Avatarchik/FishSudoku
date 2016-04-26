@@ -58,7 +58,6 @@ public class RighMenuUIController : MonoBehaviour
         if (UserInfo.Instance.canUseLife)
         {
             GameObject.FindObjectOfType<LivesController>().SubtractOneLife();
-            Debug.Log("RIGHT LIVES: "+UserInfo.Instance.lifeCount);
         }
 
         LoadingController.nextSceneName = "Map";
@@ -69,7 +68,6 @@ public class RighMenuUIController : MonoBehaviour
 
     public void BuyFullVersion()
     {
-        Debug.Log("Buy Full Version");
         Application.OpenURL("http://google.com.ua");
     }
 }

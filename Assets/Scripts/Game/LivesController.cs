@@ -31,8 +31,13 @@ public class LivesController : MonoBehaviour
             UserInfo.Instance.SaveUserInfo();
         }
 
+        if(UserInfo.Instance.exitAfterGameStart == 1)
+        {
+            UserInfo.Instance.exitAfterGameStart = 0;
+            SubtractOneLife();
+        }
+
         RefreshLifes();
-        Debug.Log("Lives Is Loaded");
     }
 
     public void RefreshLifes()
@@ -125,7 +130,6 @@ public class LivesController : MonoBehaviour
                     timeToRefillNextLife = timeToRefillLifes % 900;
                 }
 
-                Debug.Log(timeToRefillNextLife);
                 timer = new TimeSpan(0, 0, timeToRefillNextLife);
                 InvokeRepeating("TimerLifes", 0, 1.1f);
             }

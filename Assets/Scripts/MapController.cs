@@ -70,7 +70,6 @@ public class MapController : MonoBehaviour
 
         //Position of Fish Wrapper
         RectTransform tempButtonPos = levelButtons[currentLevel-1].GetComponent<RectTransform>();
-        Debug.Log(tempButtonPos.anchoredPosition);
         fishWrapper.anchoredPosition = new Vector2(Mathf.Floor(tempButtonPos.anchoredPosition.x + offsetXFishWrapper),
                 tempButtonPos.anchoredPosition.y + offsetYFishWrapper);
     }

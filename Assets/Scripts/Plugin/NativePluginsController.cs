@@ -8,11 +8,12 @@ public class NativePluginsController : MonoBehaviour
 {
     private static bool IsInit = false;
     private DateTime timeToPlay;
+    private DateTime timeToPlayNextDay;
 
     void Awake()
     {
-        IOSNotificationController.instance.RequestNotificationPermissions();
-       // InitBilling();
+        IOSNotificationController.Instance.RequestNotificationPermissions();
+        //InitBilling();
     }
 
     void Start()
@@ -24,13 +25,18 @@ public class NativePluginsController : MonoBehaviour
     private void LocalNotifications()
     {
         timeToPlay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 20, 00, 00);
-        timeToPlay = timeToPlay.AddDays(1);
+        timeToPlayNextDay = timeToPlay.AddDays(1);
 
         if (timeToPlay > DateTime.Now)
         {
             if (!PlayerPrefs.HasKey("TimeToPlayLocalNotification"))
             {
                 TimeToPlayLocalNotification(timeToPlay);
+            }
+
+            if(!PlayerPrefs.HasKey("TimeToPlayNextDayLocalNotification"))
+            {
+                TimeToPlayNextDayLocalNotification(timeToPlayNextDay);
             }
         }
         else
@@ -46,18 +52,43 @@ public class NativePluginsController : MonoBehaviour
             {
                 TimeToPlayLocalNotification(timeToPlay);
             }
+
+            if (PlayerPrefs.HasKey("TimeToPlayNextDayLocalNotification"))
+            {
+                CancelSomeLocalNotification(PlayerPrefs.GetInt("TimeToPlayNextDayLocalNotification"));
+                PlayerPrefs.DeleteKey("TimeToPlayNextDayLocalNotification");
+
+                TimeToPlayNextDayLocalNotification(timeToPlayNextDay);
+            }
+            else
+            {
+                TimeToPlayNextDayLocalNotification(timeToPlayNextDay);
+            }
         }
     }
 
     public static void TimeToPlayLocalNotification(DateTime _startTime)
     {
-        ISN_LocalNotification notification = new ISN_LocalNotification(_startTime, "Have a minute to relax, start play.", true);
-        //notification.SetData("some_test_data");
-        //notification.SetSoundName("purchase_ok.wav");
-        //notification.SetBadgesNumber(1);
+        ISN_LocalNotification notification = new ISN_LocalNotification(
+            _startTime, "Have a minute to relax, start play.", true);
+        notification.SetData("some_test_data");
+        notification.SetSoundName("purchase_ok.wav");
+        notification.SetBadgesNumber(0);
         notification.Schedule();
 
         PlayerPrefs.SetInt("TimeToPlayLocalNotification", notification.Id);
+    }
+
+    public static void TimeToPlayNextDayLocalNotification(DateTime _startTime)
+    {
+        ISN_LocalNotification notification = new ISN_LocalNotification(
+            _startTime, "Have a minute to relax, start play.", true);
+        notification.SetData("some_test_data");
+        notification.SetSoundName("purchase_ok.wav");
+        notification.SetBadgesNumber(0);
+        notification.Schedule();
+
+        PlayerPrefs.SetInt("TimeToPlayNextDayLocalNotification", notification.Id);
     }
 
     public static void LifeFullLocalNotification(DateTime _startTime)

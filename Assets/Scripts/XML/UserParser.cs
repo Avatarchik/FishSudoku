@@ -49,6 +49,9 @@ public class UserParser
     [XmlElement("CurrentLevel9")]
     public int currentLevel9;
 
+    [XmlElement("ExitAfterGameStart")]
+    public int exitAfterGameStart;
+
     //Time 
 
     public void Save(string path)
@@ -92,6 +95,7 @@ public class UserParser
         currentLevel7 = 1;
         currentLevel8 = 1;
         currentLevel9 = 1;
+        exitAfterGameStart = 0;
 
         XmlSerializer serializer = new XmlSerializer(typeof(UserParser));
         FileStream stream = new FileStream(path, FileMode.Create);

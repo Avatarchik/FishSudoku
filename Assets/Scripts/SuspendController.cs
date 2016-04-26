@@ -11,10 +11,23 @@ public class SuspendController : MonoBehaviour
     }
 
     #region Suspend
-    void OnApplicationPause(bool pauseStatus)
+    void OnApplicationFocus(bool pauseStatus)
     {
         if (!pauseStatus)
         {
+            switch (sceneName)
+            {
+                case "PlayLevel4x4":
+                case "PlayLevel5x5":
+                case "PlayLevel6x6":
+                case "PlayLevel7x7":
+                case "PlayLevel8x8":
+                case "PlayLevel9x9":
+                    UserInfo.Instance.exitAfterGameStart = 1;
+                    UserInfo.Instance.SaveUserInfo();
+                    break;
+            }
+
             if (DateTime.Now < UserInfo.Instance.timeToStartLifesTimer)
             {
                 if (PlayerPrefs.HasKey("LifeFullLocalNotification"))
@@ -45,23 +58,21 @@ public class SuspendController : MonoBehaviour
                 }
             }
         }   
-    }
-
-    void OnApplicationQuit()
-    {
-        switch (sceneName)
+        else
         {
-            case "PlayLevel4x4":
-            case "PlayLevel5x5":
-            case "PlayLevel6x6":
-            case "PlayLevel7x7":
-            case "PlayLevel8x8":
-            case "PlayLevel9x9":
-                GameObject.FindObjectOfType<LivesController>().SubtractOneLife();
-                break;
+            switch (sceneName)
+            {
+                case "PlayLevel4x4":
+                case "PlayLevel5x5":
+                case "PlayLevel6x6":
+                case "PlayLevel7x7":
+                case "PlayLevel8x8":
+                case "PlayLevel9x9":
+                    UserInfo.Instance.exitAfterGameStart = 0;
+                    UserInfo.Instance.SaveUserInfo();
+                    break;
+            }
         }
     }
     #endregion
-
-   
 }
